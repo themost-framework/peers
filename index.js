@@ -25,6 +25,10 @@ function stopWorking(workingInterval) {
             let packages = Object.keys(package.peerDependencies).map(function(key) {
                 return `${key}@${package.peerDependencies[key]}`
             });
+            // exit if peer dependencies are empty
+            if (packages.length === 0) {
+                return process.exit();
+            }
             const args = [
                 'install'
             ];
