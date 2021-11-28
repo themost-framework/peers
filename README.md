@@ -3,4 +3,4 @@ Install peer dependencies script
 
 ## Usage
 
-npx @themost/peers install
+npx @themost/peers add-peers

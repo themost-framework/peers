@@ -1,0 +1,27 @@
+{
+  "name": "@themost/peers",
+  "version": "1.0.0",
+  "description": "Install peer dependencies utility",
+  "bin": {
+    "add-peers": "bin/add-peers"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/themost-framework/peers.git"
+  },
+  "keywords": [
+    "npm",
+    "install",
+    "peer",
+    "dependencies"
+  ],
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/themost-framework/peers/issues"
+  },
+  "homepage": "https://github.com/themost-framework/peers#readme"
+}
