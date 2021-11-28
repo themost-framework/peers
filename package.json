@@ -1,6 +1,6 @@
 {
   "name": "@themost/peers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Install peer dependencies utility",
   "bin": {
     "add-peers": "bin/add-peers"
