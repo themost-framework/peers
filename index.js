@@ -14,7 +14,11 @@ function stopWorking(workingInterval) {
     // clear working interval
     clearInterval(workingInterval);
     // clear working line
-    process.stdout.clearLine();
+    if (typeof process.stdout.clearLine === 'function') {
+        process.stdout.clearLine();
+    } else {
+        process.stdout.write('\r' + '');
+    }
     process.stdout.write('\n');
 }
 
