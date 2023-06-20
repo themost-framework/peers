@@ -50,7 +50,10 @@ function stopWorking(workingInterval) {
         }
         if (Object.prototype.hasOwnProperty.call(package, 'peerDependencies')) {
             let packages = Object.keys(package.peerDependencies).map(function(key) {
-                return `${key}@"${package.peerDependencies[key]}"`
+                if (os.type() === 'Windows_NT') {
+                    return `${key}@"${package.peerDependencies[key]}"`;
+                }
+                return `${key}@${package.peerDependencies[key]}`;
             });
             // exit if peer dependencies are empty
             if (packages.length === 0) {
