@@ -61,6 +61,7 @@ function stopWorking(workingInterval) {
             ];
             let saveOption = '--no-save';
             if (externalPackage === true) {
+                saveOption = '--save';
                 if (argv['save-optional']) {
                     saveOption = '--save-optional'
                 } else if (argv['save-dev']) {
@@ -71,8 +72,6 @@ function stopWorking(workingInterval) {
                     saveOption = '--save-peer'
                 } else if (argv['save'] === false) {
                     saveOption = '--no-save'
-                } else {
-                    saveOption = '--save'
                 }
             }
             args.push.apply(args, packages);
