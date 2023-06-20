@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const { spawn } = require('child_process');
+const os = require('os');
 
 function working() {
     let P = ['\\', '|', '/', '-'];
@@ -24,7 +25,8 @@ function stopWorking(workingInterval) {
 
 (function() {
     try {
-        const package = require(resolve(process.cwd(), './package.json'));
+        const cwd = process.cwd();
+        const package = require(resolve(cwd, './package.json'));
         if (Object.prototype.hasOwnProperty.call(package, 'peerDependencies')) {
             let packages = Object.keys(package.peerDependencies).map(function(key) {
                 return `${key}@"${package.peerDependencies[key]}"`
@@ -34,15 +36,21 @@ function stopWorking(workingInterval) {
                 return process.exit();
             }
             const args = [
-                'install'
+                'i'
             ];
             args.push.apply(args, packages);
             args.push.apply(args, [
-                '--no-save'
+                '--no-save',
             ]);
             process.stdout.write(`npm ${args.join(' ')}\n`);
             const workingInterval = working();
-            const npm = spawn('npm', args, );
+            // change command to npm.cmd on windows
+            const cmd = os.type() === 'Windows_NT' ? 'npm.cmd' : 'npm';
+            const windowsVerbatimArguments = true;
+            const npm = spawn(cmd, args, {
+                cwd, // set current directory
+                windowsVerbatimArguments // do not escape arguments (windows only)
+            });
             npm.stdout.on('data', (data) => {
                 stopWorking(workingInterval);
                 process.stdout.write(data);
