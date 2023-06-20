@@ -61,7 +61,19 @@ function stopWorking(workingInterval) {
             ];
             let saveOption = '--no-save';
             if (externalPackage === true) {
-                
+                if (argv['save-optional']) {
+                    saveOption = '--save-optional'
+                } else if (argv['save-dev']) {
+                    saveOption = '--save-dev'
+                } else if (argv['save-exact']) {
+                    saveOption = '--save-exact'
+                } else if (argv['save-peer']) {
+                    saveOption = '--save-peer'
+                } else if (argv['save'] === false) {
+                    saveOption = '--no-save'
+                } else {
+                    saveOption = '--save'
+                }
             }
             args.push.apply(args, packages);
             args.push.apply(args, [
