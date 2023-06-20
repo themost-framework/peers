@@ -1,0 +1,9 @@
+{
+    "license": "MIT",
+    "peerDependencies": {
+        "@angular/common": "^11||^12||^13||^14||^15",
+        "@angular/core": "^11||^12||^13||^14||^15"
+    },
+    "dependencies": {
+    }
+}
