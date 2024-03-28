@@ -62,25 +62,22 @@ function stopWorking(workingInterval) {
             const args = [
                 'i'
             ];
-            let saveOption = '--no-save';
-            if (externalPackage === true) {
-                saveOption = '--save';
-                if (argv['save-optional']) {
-                    saveOption = '--save-optional'
-                } else if (argv['save-dev']) {
-                    saveOption = '--save-dev'
-                } else if (argv['save-exact']) {
-                    saveOption = '--save-exact'
-                } else if (argv['save-peer']) {
-                    saveOption = '--save-peer'
-                } else if (argv['save'] === false) {
-                    saveOption = '--no-save'
-                }
-            }
+            // get npm save options
+            const saveOptions = ['-P','--save-prod','-D','--save-dev','-O','--save-optional','--save-peer'];
+            // get arguments without the first argument which is may be a package.json
+            const argsWithoutArg = externalPackage ? process.argv.slice(3) : process.argv.slice(2);
+            // add packages as arguments
             args.push.apply(args, packages);
-            args.push.apply(args, [
-                saveOption,
-            ]);
+            // check if args contain a valid save option
+            const includesSaveOption = argsWithoutArg.find((arg) => {
+                return saveOptions.includes(arg);
+            });
+            // if a save option is not given
+            if (includesSaveOption == null) {
+                // push default option which is --no-save
+                argsWithoutArg.push('--no-save')
+            }
+            args.push.apply(args, argsWithoutArg);
             process.stdout.write(`npm ${args.join(' ')}\n`);
             // change command to npm.cmd on windows
             const cmd = os.type() === 'Windows_NT' ? 'npm.cmd' : 'npm';
