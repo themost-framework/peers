@@ -6,6 +6,6 @@
     },
     "dependencies": {
         "@themost/angular": "^15.1.1",
-        "@themost/client": "^2.9.6"
+        "@themost/client": "^2.13.0"
     }
 }
